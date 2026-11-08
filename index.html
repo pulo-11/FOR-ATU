@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8dce7">
+<title>For Atu</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --pink: #e9a9c0;
+  --rose: #c77e9d;
+  --deep: #925873;
+  --pale: #fff7fa;
+  --cream: #fffaf4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #fceaf0;
+  color: #80566b;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+}
+
+button {
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+}
+
+#background {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(circle at 15% 15%, #fff9f7 0, transparent 30%),
+    radial-gradient(circle at 85% 80%, #f5d4e2 0, transparent 35%),
+    linear-gradient(145deg, #fff3f6, #f8dce7);
+}
+
+#sparkles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.sparkle {
+  position: absolute;
+  color: #fffdf0;
+  text-shadow: 0 0 7px white, 0 0 13px #e7a9c3;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .2; transform: scale(.7) rotate(0deg); }
+  to { opacity: 1; transform: scale(1.3) rotate(25deg); }
+}
+
+.site-credit {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  z-index: 19;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: #925873;
+  text-shadow: 0 1px 0 #fff8fb, 0 0 8px #fff;
+  pointer-events: none;
+}
+
+.sound-toggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 25;
+  border: 2px solid #e3b8ca;
+  border-radius: 7px;
+  background: #fff7f8e8;
+  color: var(--deep);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 9px 10px;
+  box-shadow: 0 3px 0 #e5c2cf;
+}
+
+.progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #f2d5e0;
+  z-index: 20;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 20%;
+  background: #c87f9e;
+  transition: width .4s;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+  padding: 55px 18px 75px;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen.active {
+  display: flex;
+  animation: screenIn .55s ease both;
+}
+
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.screen-content {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  position: relative;
+}
+
+.eyebrow {
+  color: #b27d96;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.pixel {
+  font-family: 'Press Start 2P', monospace;
+  color: var(--rose);
+  text-shadow: 2px 2px 0 #f8d4e2;
+}
+
+.pixel-title {
+  font-size: clamp(19px, 5vw, 27px);
+  line-height: 1.8;
+  margin: 8px 0;
+}
+
+.heading {
+  font-size: clamp(14px, 3.8vw, 18px);
+  line-height: 1.9;
+  margin: 10px 0;
+}
+
+.subheading {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #9d7187;
+  max-width: 390px;
+  margin: 15px auto 22px;
+}
+
+.small-note {
+  font-size: 11px;
+  color: #aa8295;
+  margin: 15px auto;
+}
+
+.primary-btn,
+.secondary-btn {
+  border: 2px solid #d99bb5;
+  border-radius: 7px;
+  padding: 12px 17px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.primary-btn {
+  color: white;
+  background: #d991ad;
+  box-shadow: 0 4px 0 #bd7897;
+}
+
+.secondary-btn {
+  color: #a16f88;
+  background: #fff7fa;
+  box-shadow: 0 4px 0 #e8c6d4;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-2px);
+}
+
+.primary-btn:active,
+.secondary-btn:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 25px auto 5px;
+  flex-wrap: wrap;
+}
+
+.footer {
+  font-size: 9px;
+  color: #b48b9e;
+  margin-top: 30px;
+  letter-spacing: 1px;
+}
+
+.welcome-art {
+  width: 155px;
+  height: 180px;
+  display: block;
+  margin: 15px auto 8px;
+  image-rendering: pixelated;
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+.welcome-decoration {
+  color: #d99db6;
+  letter-spacing: 10px;
+  font-size: 14px;
+  margin: 12px auto;
+}
+
+.envelope-wrap {
+  width: 190px;
+  height: 135px;
+  margin: 28px auto 12px;
+  position: relative;
+  cursor: pointer;
+  perspective: 700px;
+}
+
+.envelope {
+  position: absolute;
+  inset: 0;
+  background: #f3cbd9;
+  border: 2px solid #d99db5;
+  border-radius: 7px;
+  box-shadow: 0 7px 0 #dfb3c5, 0 12px 20px #b9819925;
+}
+
+.envelope:before,
+.envelope:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  z-index: 3;
+}
+
+.envelope:before {
+  left: 0;
+  border-width: 65px 94px 0 0;
+  border-color: transparent #eab9cc transparent transparent;
+}
+
+.envelope:after {
+  right: 0;
+  border-width: 65px 0 0 94px;
+  border-color: transparent transparent transparent #eab9cc;
+}
+
+.envelope-flap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 93px solid transparent;
+  border-right: 93px solid transparent;
+  border-top: 75px solid #f7d9e4;
+  transform-origin: top;
+  transition: transform .65s ease;
+  z-index: 5;
+}
+
+.seal {
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: #d88eaa;
+  color: white;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+  top: 49px;
+  left: calc(50% - 15px);
+  z-index: 7;
+  transition: opacity .3s, transform .3s;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+  transform: scale(.5);
+}
+
+.letter-paper {
+  display: none;
+  width: 100%;
+  max-width: 390px;
+  margin: 20px auto;
+  padding: 24px 22px;
+  text-align: left;
+  background: #fffaf6;
+  border: 2px solid #e8c5d2;
+  border-radius: 6px;
+  box-shadow: 0 5px 0 #e8c4d1, 0 10px 20px #b9819920;
+  animation: appear .6s ease both;
+}
+
+.letter-paper.show {
+  display: block;
+}
+
+.letter-paper h3 {
+  text-align: center;
+  color: #c77e9d;
+  font-size: 17px;
+  margin: 0 0 18px;
+}
+
+.letter-paper p {
+  font-size: 13px;
+  line-height: 1.85;
+  color: #8f6b7c;
+  margin: 13px 0;
+}
+
+.letter-sign {
+  text-align: right;
+  color: #bd7897;
+  font-weight: 800;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+.cake-scene {
+  position: relative;
+  width: 270px;
+  height: 210px;
+  margin: 25px auto 20px;
+}
+
+.cake {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 210px;
+  height: 105px;
+  background: #e8a9c1;
+  border: 3px solid #c985a4;
+  border-radius: 8px 8px 15px 15px;
+  box-shadow: inset 0 -12px #d88eaa;
+}
+
+.cake:before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: -12px;
+  height: 28px;
+  border: 3px solid #d69eb5;
+  border-radius: 50%;
+  background: #fff0ed;
+}
+
+.cake-top {
+  position: absolute;
+  top: -9px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  z-index: 2;
+}
+
+.cake-top:after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 20px;
+  left: 40px;
+  top: 13px;
+  background: #fff0ed;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 40px 2px #fff0ed, 85px -1px #fff0ed, 126px 3px #fff0ed;
+}
+
+.cake-decoration {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  right: 0;
+  color: #fff2e8;
+  font-size: 14px;
+  letter-spacing: 13px;
+  text-align: center;
+}
+
+.cake-plate {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 255px;
+  height: 16px;
+  background: #fff0ed;
+  border: 3px solid #d69eb5;
+  border-radius: 50%;
+}
+
+.candle {
+  position: absolute;
+  z-index: 5;
+  bottom: 102px;
+  left: calc(50% - 6px);
+  width: 12px;
+  height: 48px;
+  background: repeating-linear-gradient(
+    135deg,
+    #fff4ee 0px,
+    #fff4ee 5px,
+    #e8a7c1 5px,
+    #e8a7c1 9px
+  );
+  border: 1px solid #c78ba4;
+  border-radius: 2px;
+}
+
+.flame {
+  position: absolute;
+  top: -22px;
+  left: 1px;
+  width: 9px;
+  height: 17px;
+  background: #ffda87;
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: 0 0 9px #ffd978, 0 0 18px #ffd978;
+  animation: flame 1s ease-in-out infinite alternate;
+}
+
+@keyframes flame {
+  from { transform: scale(.9) rotate(-4deg); }
+  to { transform: scale(1.08) rotate(4deg); }
+}
+
+.candle.out .flame {
+  display: none;
+}
+
+.smoke {
+  position: absolute;
+  top: -34px;
+  left: -10px;
+  width: 32px;
+  height: 36px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.smoke:before,
+.smoke:after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 17px;
+  border-left: 3px solid #b99eae;
+  border-radius: 50%;
+  transform: rotate(20deg);
+}
+
+.smoke:before {
+  left: 8px;
+  top: 8px;
+}
+
+.smoke:after {
+  left: 18px;
+  top: 0;
+  transform: rotate(-25deg);
+}
+
+.candle.out .smoke {
+  animation: smoke 2.2s ease-out forwards;
+}
+
+@keyframes smoke {
+  0% { opacity: 0; transform: translateY(5px) scale(.7); }
+  15% { opacity: 1; }
+  70% { opacity: .8; }
+  100% { opacity: 0; transform: translateY(-48px) scale(1.5); }
+}
+
+.cake-message {
+  display: none;
+  color: var(--rose);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  line-height: 2.2;
+  margin: 20px auto;
+}
+
+.cake-message.show {
+  display: block;
+  animation: appear .8s ease both;
+}
+
+.gallery {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin: 22px auto;
+  width: 100%;
+}
+
+.gallery::before {
+  content: "✦     ✧          ✦       ✧";
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  color: #fff9d9;
+  text-shadow: 0 0 8px #fff, 0 0 13px #e6b7c8;
+  letter-spacing: 24px;
+  line-height: 5;
+  font-size: 13px;
+  pointer-events: none;
+  z-index: 3;
+  opacity: .8;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+.photo-card {
+  background: #fffaf6;
+  padding: 7px 7px 12px;
+  border: 2px solid #e8c5d2;
+  box-shadow: 0 4px 0 #e8c4d1, 0 7px 15px #b9819920;
+  border-radius: 5px;
+  position: relative;
+  transform: rotate(-1deg);
+  transition: transform .25s;
+  min-width: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.photo-card:nth-child(even) {
+  transform: rotate(1.5deg);
+}
+
+.photo-card:hover {
+  transform: rotate(0deg) scale(1.025);
+  z-index: 4;
+}
+
+.photo-card:active {
+  transform: scale(.97);
+}
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  background: #f9eaf0;
+  border-radius: 2px;
+}
+
+.photo-card .photo-caption {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #a8758e;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.photo-card:nth-child(3n) {
+  grid-column: span 2;
+  width: 75%;
+  justify-self: center;
+}
+
+.photo-card:nth-child(3n) img {
+  max-height: 300px;
+}
+
+.gallery-hint {
+  font-size: 11px;
+  color: #a98295;
+  margin-bottom: 8px;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #59394edb;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.lightbox.show {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border: 5px solid #fffaf6;
+  border-radius: 5px;
+  box-shadow: 0 8px 30px #35202d55;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  color: white;
+  font-size: 30px;
+  background: transparent;
+  border: 0;
+}
+
+.final-photo-frame {
+  width: 100%;
+  height: 290px;
+  margin: 18px auto;
+  padding: 7px;
+  background: #fffaf6;
+  border: 2px solid #e5bfd0;
+  border-radius: 9px;
+  box-shadow: 0 5px 0 #e8c4d1, 0 10px 25px #b9819920;
+  overflow: hidden;
+}
+
+.final-photo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 4px;
+  background: #f5dce6;
+}
+
+.final-message {
+  color: var(--rose);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  line-height: 2.2;
+  margin: 20px auto;
+}
+
+.signature {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--rose);
+  margin-top: 18px;
+}
+
+.confetti {
+  position: fixed;
+  z-index: 28;
+  top: -15px;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  animation: fall 3.2s linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 370px) {
+  .screen { padding-left: 13px; padding-right: 13px; }
+  .gallery { gap: 9px; }
+  .photo-card { padding: 5px 5px 9px; }
+  .pixel-title { font-size: 17px; }
+  .final-photo-frame { height: 230px; }
+}
+
+@media (min-width: 600px) {
+  .screen { padding-top: 45px; padding-bottom: 55px; }
+  .gallery { gap: 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="background"></div>
+<div id="sparkles"></div>
+
+<div class="site-credit">MADE WITH LOVE BY PULO</div>
+
+<button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">SFX ON</button>
+
+<div class="progress">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<section class="screen active" id="screen1">
+  <div class="screen-content">
+
+    <div class="eyebrow">A little birthday surprise</div>
+
+    <h1 class="pixel pixel-title">Happy Birthday</h1>
+    <h2 class="pixel heading">Atu</h2>
+
+    <svg class="welcome-art floating" viewBox="0 0 128 150"
+         xmlns="http://www.w3.org/2000/svg"
+         shape-rendering="crispEdges"
+         role="img" aria-label="Cute pixel art girl with short black hair and a pink dress">
+
+      <ellipse cx="64" cy="141" rx="27" ry="4" fill="#bd829b" opacity=".3"/>
+
+      <rect x="35" y="13" width="58" height="57" fill="#28232d"/>
+      <rect x="29" y="27" width="10" height="42" fill="#28232d"/>
+      <rect x="89" y="27" width="10" height="42" fill="#28232d"/>
+
+      <rect x="39" y="20" width="50" height="42" fill="#f5c9b6"/>
+      <rect x="35" y="29" width="6" height="29" fill="#f5c9b6"/>
+      <rect x="87" y="29" width="6" height="29" fill="#f5c9b6"/>
+
+      <rect x="35" y="13" width="58" height="18" fill="#28232d"/>
+      <rect x="29" y="24" width="12" height="16" fill="#28232d"/>
+      <rect x="87" y="24" width="12" height="16" fill="#28232d"/>
+      <rect x="43" y="19" width="18" height="4" fill="#49404c"/>
+
+      <rect x="48" y="43" width="5" height="7" fill="#392a36"/>
+      <rect x="75" y="43" width="5" height="7" fill="#392a36"/>
+      <rect x="42" y="54" width="10" height="4" fill="#e99eae"/>
+      <rect x="76" y="54" width="10" height="4" fill="#e99eae"/>
+
+      <rect x="59" y="58" width="10" height="3" fill="#a45d70"/>
+      <rect x="56" y="56" width="4" height="3" fill="#a45d70"/>
+      <rect x="68" y="56" width="4" height="3" fill="#a45d70"/>
+
+      <rect x="56" y="63" width="16" height="6" fill="#f2c2d4"/>
+      <rect x="43" y="68" width="42" height="9" fill="#f7dce6"/>
+      <rect x="37" y="76" width="54" height="39" fill="#e9a9c3"/>
+      <rect x="32" y="83" width="64" height="26" fill="#e9a9c3"/>
+      <rect x="43" y="73" width="42" height="5" fill="#fff0f5"/>
+
+      <rect x="61" y="73" width="7" height="7" fill="#c77e9d"/>
+      <rect x="48" y="87" width="7" height="7" fill="#fbe7ee"/>
+      <rect x="74" y="87" width="7" height="7" fill="#fbe7ee"/>
+
+      <rect x="37" y="78" width="8" height="25" fill="#f5c9b6"/>
+      <rect x="83" y="78" width="8" height="25" fill="#f5c9b6"/>
+      <rect x="33" y="99" width="12" height="7" fill="#f5c9b6"/>
+      <rect x="83" y="99" width="12" height="7" fill="#f5c9b6"/>
+
+      <rect x="49" y="114" width="10" height="15" fill="#f5c9b6"/>
+      <rect x="69" y="114" width="10" height="15" fill="#f5c9b6"/>
+      <rect x="44" y="127" width="18" height="8" fill="#b87592"/>
+      <rect x="67" y="127" width="18" height="8" fill="#b87592"/>
+
+      <rect x="89" y="18" width="9" height="8" fill="#e99fbd"/>
+      <rect x="98" y="14" width="9" height="12" fill="#e99fbd"/>
+      <rect x="81" y="14" width="9" height="12" fill="#e99fbd"/>
+      <rect x="90" y="17" width="7" height="6" fill="#fff0f5"/>
+    </svg>
+
+    <div class="welcome-decoration">* . * . * . *</div>
+
+    <p class="subheading">
+      A little world made just for you.
+    </p>
+
+    <button class="primary-btn" onclick="goTo(2)">
+      LET'S BEGIN
+    </button>
+
+    <div class="footer">MADE WITH LOVE BY PULO</div>
+  </div>
+</section>
+
+<section class="screen" id="screen2">
+  <div class="screen-content">
+
+    <div class="eyebrow">A little something for you</div>
+    <h2 class="pixel heading">A Letter</h2>
+
+    <p class="subheading">Something I wanted you to have.</p>
+
+    <div class="envelope-wrap" id="envelopeWrap" onclick="openLetter()">
+      <div class="envelope" id="envelope">
+        <div class="envelope-flap"></div>
+        <div class="seal">P</div>
+      </div>
+    </div>
+
+    <p class="small-note" id="letterHint">Tap the envelope to open it.</p>
+
+    <article class="letter-paper" id="letterPaper">
+      <h3>Happy birthday, Atu!</h3>
+
+      <p>
+        Happy Birthday! I hope you know how special you are
+        and how much happiness you deserve.
+      </p>
+
+      <p>
+        I'm genuinely grateful to have you in my life.
+        I hope this new year brings you beautiful moments,
+        new experiences and all the little things that make
+        you happy.
+      </p>
+
+      <p>
+        Never forget how appreciated you are. Keep being
+        yourself, keep smiling and never stop going after
+        the things you dream about.
+      </p>
+
+      <p>
+        Here's to more laughter, more memories and many
+        wonderful birthdays ahead. I hope today makes you
+        feel as special as you truly are.
+      </p>
+
+      <div class="letter-sign">
+        With lots of love,<br>
+        Pulo
+      </div>
+    </article>
+
+    <div class="button-row">
+      <button class="secondary-btn" onclick="goTo(1)">BACK</button>
+      <button class="primary-btn" id="letterNext"
+              onclick="goTo(3)" disabled style="opacity:.45">
+        NEXT
+      </button>
+    </div>
+
+    <div class="footer">MADE WITH LOVE BY PULO</div>
+  </div>
+</section>
+
+<section class="screen" id="screen3">
+  <div class="screen-content">
+
+    <div class="eyebrow">Make a little wish</div>
+    <h2 class="pixel heading">Your Birthday Cake</h2>
+
+    <p class="subheading">
+      Take a moment, make a wish and blow out your candle.
+    </p>
+
+    <div class="cake-scene">
+      <div class="cake">
+        <div class="cake-top"></div>
+        <div class="cake-decoration">* * *</div>
+
+        <div class="candle" id="candle1">
+          <div class="flame"></div>
+          <div class="smoke"></div>
+        </div>
+      </div>
+
+      <div class="cake-plate"></div>
+    </div>
+
+    <div class="cake-message" id="cakeMessage">
+      MAY ALL YOUR WISHES COME TRUE.
+    </div>
+
+    <button class="primary-btn" id="blowButton" onclick="blowCandles()">
+      BLOW THE CANDLE
+    </button>
+
+    <div class="button-row">
+      <button class="secondary-btn" onclick="goTo(2)">BACK</button>
+      <button class="primary-btn" id="cakeNext"
+              onclick="goTo(4)" disabled style="opacity:.45">
+        NEXT
+      </button>
+    </div>
+
+    <div class="footer">MADE WITH LOVE BY PULO</div>
+  </div>
+</section>
+
+<section class="screen" id="screen4">
+  <div class="screen-content">
+
+    <div class="eyebrow">A collection of little moments</div>
+    <h2 class="pixel heading">A Little Gallery</h2>
+
+    <p class="subheading">A few snapshots of you.</p>
+
+    <p class="gallery-hint">Tap a picture to see it larger.</p>
+
+    <div class="gallery">
+
+      <div class="photo-card" onclick="showPhoto('atu1.jpg')">
+        <img src="atu1.jpg" alt="Atu photo 1" loading="lazy">
+        <span class="photo-caption">01</span>
+      </div>
+
+      <div class="photo-card" onclick="showPhoto('atu2.png')">
+        <img src="atu2.png" alt="Atu photo 2" loading="lazy">
+        <span class="photo-caption">02</span>
+      </div>
+
+      <div class="photo-card" onclick="showPhoto('atu3.png')">
+        <img src="atu3.png" alt="Atu photo 3" loading="lazy">
+        <span class="photo-caption">03</span>
+      </div>
+
+      <div class="photo-card" onclick="showPhoto('atu4.png')">
+        <img src="atu4.png" alt="Atu photo 4" loading="lazy">
+        <span class="photo-caption">04</span>
+      </div>
+
+      <div class="photo-card" onclick="showPhoto('atu5.jpg')">
+        <img src="atu5.jpg" alt="Atu photo 5" loading="lazy">
+        <span class="photo-caption">05</span>
+      </div>
+
+      <div class="photo-card" onclick="showPhoto('atu6.png')">
+        <img src="atu6.png" alt="Atu photo 6" loading="lazy">
+        <span class="photo-caption">06</span>
+      </div>
+
+      <div class="photo-card" onclick="showPhoto('atu7.png')">
+        <img src="atu7.png" alt="Atu photo 7" loading="lazy">
+        <span class="photo-caption">07</span>
+      </div>
+
+      <div class="photo-card" onclick="showPhoto('atu8.jpg')">
+        <img src="atu8.jpg" alt="Atu photo 8" loading="lazy">
+        <span class="photo-caption">08</span>
+      </div>
+
+    </div>
+
+    <div class="button-row">
+      <button class="secondary-btn" onclick="goTo(3)">BACK</button>
+      <button class="primary-btn" onclick="goTo(5)">ONE LAST THING</button>
+    </div>
+
+    <div class="footer">MADE WITH LOVE BY PULO</div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closePhoto()">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <img id="largePhoto" src="" alt="Larger photo of Atu">
+</div>
+
+<section class="screen" id="screen5">
+  <div class="screen-content">
+
+    <div class="eyebrow">Before you go...</div>
+
+    <h2 class="pixel heading">One Last Thing</h2>
+
+    <div class="final-photo-frame">
+      <img src="atu9.jpg" alt="Atu" class="final-photo">
+    </div>
+
+    <div class="final-message">
+      I HOPE THIS YEAR<br>
+      IS KIND TO YOU.
+    </div>
+
+    <p class="subheading">
+      Keep smiling, keep dreaming and keep being you.
+      You deserve so many beautiful things.
+    </p>
+
+    <div class="signature">
+      Happy Birthday, Atu.
+      <br><br>
+      With love, Pulo.
+    </div>
+
+    <div class="button-row">
+      <button class="secondary-btn" onclick="goTo(4)">BACK</button>
+      <button class="primary-btn" onclick="celebrate()">CELEBRATE!</button>
+    </div>
+
+    <div class="footer">MADE WITH LOVE BY PULO</div>
+  </div>
+</section>
+
+<script>
+let currentScreen = 1;
+
+function goTo(number) {
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+
+  document.getElementById('screen' + number).classList.add('active');
+
+  currentScreen = number;
+
+  document.getElementById('progressFill').style.width =
+    (number * 20) + '%';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  playSound('click');
+}
+
+let soundEnabled = true;
+let audioContext = null;
+
+const soundToggle = document.getElementById('soundToggle');
+
+soundToggle.addEventListener('click', () => {
+  soundEnabled = !soundEnabled;
+  soundToggle.textContent = soundEnabled ? 'SFX ON' : 'SFX OFF';
+
+  if (soundEnabled) playSound('chime');
+});
+
+function playSound(type) {
+  if (!soundEnabled) return;
+
+  try {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    const now = audioContext.currentTime;
+
+    const sounds = {
+      click: [650, 0.07],
+      pop: [850, 0.12],
+      chime: [1050, 0.3],
+      celebrate: [780, 0.5],
+      blow: [220, 0.25]
+    };
+
+    const settings = sounds[type] || sounds.click;
+
+    oscillator.type = type === 'blow' ? 'sine' : 'triangle';
+    oscillator.frequency.setValueAtTime(settings[0], now);
+
+    if (type === 'celebrate') {
+      oscillator.frequency.exponentialRampToValueAtTime(1200, now + .25);
+    }
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.12, now + .015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + settings[1]);
+
+    oscillator.start(now);
+    oscillator.stop(now + settings[1] + .03);
+
+  } catch (error) {
+    console.log('Sound unavailable');
+  }
+}
+
+let letterOpened = false;
+
+function openLetter() {
+  if (letterOpened) return;
+
+  letterOpened = true;
+
+  playSound('pop');
+
+  document.getElementById('envelope').classList.add('open');
+
+  document.getElementById('letterHint').textContent =
+    'A little letter, just for you.';
+
+  setTimeout(() => {
+    document.getElementById('letterPaper').classList.add('show');
+
+    const nextButton = document.getElementById('letterNext');
+    nextButton.disabled = false;
+    nextButton.style.opacity = '1';
+
+    playSound('chime');
+  }, 650);
+}
+
+let candlesOut = false;
+
+function blowCandles() {
+  if (candlesOut) return;
+
+  candlesOut = true;
+
+  playSound('blow');
+
+  document.getElementById('candle1').classList.add('out');
+
+  setTimeout(() => {
+    document.getElementById('cakeMessage').classList.add('show');
+
+    document.getElementById('blowButton').textContent = 'WISH MADE';
+    document.getElementById('blowButton').disabled = true;
+
+    const nextButton = document.getElementById('cakeNext');
+    nextButton.disabled = false;
+    nextButton.style.opacity = '1';
+
+    playSound('chime');
+    makeConfetti(35);
+
+  }, 650);
+}
+
+function showPhoto(src) {
+  if (!src) return;
+
+  playSound('pop');
+
+  document.getElementById('largePhoto').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
+
+function closePhoto() {
+  document.getElementById('lightbox').classList.remove('show');
+}
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closePhoto();
+});
+
+function makeConfetti(amount = 65) {
+  const colors = [
+    '#e5a4bd',
+    '#f5d4df',
+    '#fff1c8',
+    '#c98ba9',
+    '#fff8f4'
+  ];
+
+  for (let i = 0; i < amount; i++) {
+    const piece = document.createElement('div');
+
+    piece.className = 'confetti';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    piece.style.animationDelay = Math.random() * 1.2 + 's';
+    piece.style.animationDuration = (2.3 + Math.random() * 2) + 's';
+    piece.style.width = (5 + Math.random() * 5) + 'px';
+    piece.style.height = (5 + Math.random() * 7) + 'px';
+
+    document.body.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 5500);
+  }
+}
+
+function celebrate() {
+  playSound('celebrate');
+  makeConfetti(120);
+}
+
+function createSparkles() {
+  const container = document.getElementById('sparkles');
+
+  for (let i = 0; i < 35; i++) {
+    const star = document.createElement('span');
+
+    star.className = 'sparkle';
+    star.textContent = Math.random() > .5 ? '✦' : '✧';
+
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 4 + 's';
+    star.style.animationDuration = (2 + Math.random() * 3) + 's';
+    star.style.fontSize = (7 + Math.random() * 10) + 'px';
+
+    container.appendChild(star);
+  }
+}
+
+createSparkles();
+
+document.querySelectorAll('.photo-card img').forEach(img => {
+  img.addEventListener('error', function() {
+    this.alt = 'Photo not found: ' + this.getAttribute('src');
+    this.style.minHeight = '100px';
+    this.style.background = '#f2dce5';
+  });
+});
+</script>
+
+</body>
+</html>
